@@ -17,7 +17,7 @@ const portfolioData = [
     title: 'Asian Soft Glam Video',
     type: 'video',
     category: 'asian',
-    url: '/video/asian-bridal-video-amsterdam.mp4', // Убрано лишнее .mp4
+    url: '/video/asian-bridal-video-amsterdam.mp4',
     alt: 'Asian bridal makeup process video in Amsterdam by Bride Palette',
     grid: '1 / 1 / 4 / 2',
     isTall: true,
@@ -32,13 +32,23 @@ const portfolioData = [
     grid: '1 / 2 / 4 / 3',
     isTall: true,
   },
+  // 3. НОВОЕ ВИДЕО: Low Updo (Низкий пучок)
+  {
+    title: 'Bridal Low Updo Hairstyle | Amsterdam',
+    type: 'video',
+    category: 'hairstyles',
+    url: '/video/bridal-low-updo-hairstyle-amsterdam.mp4',
+    alt: 'Textured bridal low updo hairstyle with romantic volume in Amsterdam by Bride Palette',
+    grid: '4 / 1 / 7 / 2',
+    isTall: true,
+  },
   {
     title: 'IMG_0001',
     type: 'image',
     category: 'european',
     url: '/img/portfolio/section_1.jpg',
     alt: 'Classic European bridal hair and makeup in Amsterdam',
-    grid: '5 / 1 / 8 / 2',
+    grid: '4 / 2 / 7 / 3',
     isTall: true,
   },
   {
@@ -47,7 +57,7 @@ const portfolioData = [
     category: 'tan',
     url: '/img/portfolio/section_2.jpg',
     alt: 'Bridal makeup for tan skin with golden glow in Netherlands',
-    grid: '9 / 1 / 12 / 2',
+    grid: '7 / 1 / 10 / 2',
     isTall: true,
   },
   {
@@ -56,7 +66,7 @@ const portfolioData = [
     category: 'hairstyles',
     url: '/img/portfolio/section_3.jpg',
     alt: 'Textured wedding updo hairstyle by Amsterdam bridal hairstylist',
-    grid: '13 / 1 / 14 / 2',
+    grid: '7 / 2 / 9 / 3',
     isTall: false,
   },
   {
@@ -65,7 +75,7 @@ const portfolioData = [
     category: 'asian',
     url: '/img/portfolio/section_5.jpg',
     alt: 'Asian soft glam bridal beauty in Amsterdam by Bride Palette',
-    grid: '15 / 1 / 18 / 2',
+    grid: '10 / 1 / 13 / 2',
     isTall: true,
   },
   {
@@ -74,8 +84,8 @@ const portfolioData = [
     category: 'european',
     url: '/img/portfolio/section_7.jpg',
     alt: 'Natural romantic bridal makeup Netherlands',
-    grid: '19 / 1 / 20 / 2',
-    isTall: true,
+    grid: '9 / 2 / 11 / 3',
+    isTall: false,
   },
   {
     title: 'IMG_0008',
@@ -83,7 +93,7 @@ const portfolioData = [
     category: 'hairstyles',
     url: '/img/portfolio/section_8.jpg',
     alt: 'Wedding hairstyle details for bride in Amsterdam',
-    grid: '4 / 2 / 6 / 3',
+    grid: '13 / 1 / 15 / 2',
     isTall: false,
   },
   {
@@ -92,7 +102,7 @@ const portfolioData = [
     category: 'tan',
     url: '/img/portfolio/section_9.jpg',
     alt: 'Glowy bridal makeup on warm skin tone in Netherlands',
-    grid: '7 / 2 / 10 / 3',
+    grid: '11 / 2 / 14 / 3',
     isTall: true,
   },
   {
@@ -101,7 +111,7 @@ const portfolioData = [
     category: 'asian',
     url: '/img/portfolio/section_10.jpg',
     alt: 'Asian bridal hair styling and makeup in Amsterdam',
-    grid: '11 / 2 / 14 / 3',
+    grid: '15 / 1 / 18 / 2',
     isTall: true,
   },
   {
@@ -110,7 +120,7 @@ const portfolioData = [
     category: 'european',
     url: '/img/portfolio/section_11.jpg',
     alt: 'Soft glam European wedding look in Netherlands',
-    grid: '15 / 2 / 17 / 3',
+    grid: '14 / 2 / 17 / 3',
     isTall: true,
   },
   {
@@ -119,7 +129,7 @@ const portfolioData = [
     category: 'hairstyles',
     url: '/img/portfolio/section_12.jpg',
     alt: 'Textured bridal bun hairstyle Bride Palette',
-    grid: '18 / 2 / 19 / 3',
+    grid: '18 / 1 / 20 / 2',
     isTall: false,
   },
   {
@@ -128,7 +138,7 @@ const portfolioData = [
     category: 'tan',
     url: '/img/portfolio/section_13.jpg',
     alt: 'Sun-kissed bronzed bridal makeup in Amsterdam',
-    grid: '20 / 2 / 23 / 3',
+    grid: '17 / 2 / 20 / 3',
     isTall: true,
   },
 ];
@@ -142,11 +152,12 @@ export const EveryBrideDeserves = () => {
     : portfolioData.filter((item) => item.category === activeCategory);
 
   return (
-    <StyledSection isMobile={isMobile}>
-      <Container>
-        <StyledH1 variant='h3'>every bride deserves</StyledH1>
+    <StyledSection isMobile={isMobile} style={{ backgroundColor: '#ffffff', color: '#000000' }}>
+      <Container style={{ backgroundColor: '#ffffff' }}>
+        <StyledH1 variant='h3' style={{ color: '#000000' }}>every bride deserves</StyledH1>
         <StyledH2 variant='h3'>to fall in love with themselves</StyledH2>
 
+        {/* Переключатель категорий */}
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -181,9 +192,9 @@ export const EveryBrideDeserves = () => {
           ))}
         </div>
 
+        {/* Галерея медиафайлов */}
         <StyledWrapper isMobile={isMobile}>
           {filteredItems.map((item, index) => {
-            // Если выбран фильтр (не All), игнорируем жесткую привязку к колонкам, чтобы верстка не "лагала"
             const gridStyle = activeCategory === 'all' ? item.grid : 'auto';
 
             return item.type === 'video' ? (
@@ -196,7 +207,7 @@ export const EveryBrideDeserves = () => {
                   height: '100%', 
                   overflow: 'hidden', 
                   borderRadius: '8px',
-                  backgroundColor: '#f0f0f0'
+                  backgroundColor: '#fafafa',
                 }}
               >
                 <video
@@ -205,6 +216,7 @@ export const EveryBrideDeserves = () => {
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   style={{
                     width: '100%',
                     height: '100%',
