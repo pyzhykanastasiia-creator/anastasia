@@ -22,12 +22,12 @@ const portfolioData = [
     grid: '1 / 1 / 4 / 2',
     isTall: true,
   },
-  // 2. Новое видео Half Up Half Down (исправлена позиция grid, чтобы не накладывалось)
+  // 2.  видео Half Up Half Down 
   {
     title: 'Bridal Half Up Half Down Styling | Amsterdam',
     type: 'video',
     category: 'hairstyles',
-    url: '/video/bridal-half-up-half-down-hairstylist-amsterdam.mp4.mp4',
+    url: '/video/bridal-half-up-half-down-hairstylist-amsterdam.mp4',
     alt: 'Textured bridal half up half down hairstyle with romantic waves by Amsterdam hairstylist Bride Palette',
     grid: '1 / 2 / 4 / 3',
     isTall: true,
