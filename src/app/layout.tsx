@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Providers from './providers';
 import Script from 'next/script';
@@ -8,13 +8,22 @@ export const metadata: Metadata = {
   description: 'Key words: hair, make-up, wedding, bridal, hair stylist, make-up artist, hair and make-up artist',
 };
 
+// Запрещаем мобильным браузерам включать темную тему
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#faf8f6', // Цвет шапки браузера в тон фону сайта
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ colorScheme: 'light' }}>
+      <head>
+        <meta name="color-scheme" content="light only" />
+      </head>
       <body>
         <Providers>{children}</Providers>
 
