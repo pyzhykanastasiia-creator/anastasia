@@ -28,7 +28,7 @@ import { useResponsive } from '@/contexts/ResponsiveContext';
 //     image: '/img/homepage/Homepage9.jpg',
 //     name: 'Basic',
 //     name2: 'Package',
-//     price: '€ 800',
+//     price: '€ 1000',
 //     name3: "What you'll receive:",
 //     text: [
 //       'CONSULTATION',
@@ -44,7 +44,7 @@ import { useResponsive } from '@/contexts/ResponsiveContext';
 //     name: 'Basic',
 //     spanName: ' +2guest',
 //     name2: 'Package',
-//     price: '€ 1000',
+//     price: '€ 1300',
 //     name3: "What you'll receive:",
 //     text: [
 //       'SOFT MAKEUP&HAIRSTYLE FOR 2 GUESTS (MAX 1 HOUR FOR EACH)',
@@ -60,7 +60,7 @@ import { useResponsive } from '@/contexts/ResponsiveContext';
 //     image: '/img/homepage/Homepage11.jpg',
 //     name: 'Luxe',
 //     name2: 'Package',
-//     price: '€ 1200',
+//     price: '€ 1400',
 //     name3: "What you'll receive:",
 //     text: [
 //       'PERSONAL BEAUTY ASSISTANT FOR 8 HOURS',
@@ -76,7 +76,7 @@ import { useResponsive } from '@/contexts/ResponsiveContext';
 //     image: '/img/homepage/Homepage12.png',
 //     name: '2 grooms',
 //     name2: 'Package',
-//     price: '€ 400',
+//     price: '€ 550',
 //     name3: "What you'll receive:",
 //     text: [
 //       'CONSULTATION',
