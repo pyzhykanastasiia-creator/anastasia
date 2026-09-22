@@ -1,6 +1,6 @@
 'use client';
-import { Button, Container } from '@mui/material';
-import { FormProvider, useForm } from 'react-hook-form';
+import { Button, Container, FormControlLabel, Checkbox, FormHelperText, FormControl, FormLabel } from '@mui/material';
+import { FormProvider, useForm, Controller } from 'react-hook-form';
 import {
   StyledButtonWrapper,
   StyledFormWrapper,
@@ -26,40 +26,63 @@ export const Form = () => {
       date: new Date(),
       ceremonyLocation: '',
       notice: '',
+      preferredContact: ['email'], // По умолчанию выбран Email
     },
   });
 
-  const { control, handleSubmit, reset } = methods;
+  const { control, handleSubmit, reset, watch, setError, clearErrors, formState: { errors } } = methods;
+
+  // Отслеживаем выбранные способы связи
+  const preferredContact = watch('preferredContact') || [];
 
   const onSubmit = (data: any) => {
+    // Валидация: должен быть выбран хотя бы один способ связи
+    if (!data.preferredContact || data.preferredContact.length === 0) {
+      setError('preferredContact' as any, {
+        type: 'manual',
+        message: 'Please select at least one preferred contact method.',
+      });
+      return;
+    }
+
+    // Валидация: если выбран WhatsApp, телефон обязателен
+    const isWhatsAppSelected = data.preferredContact.includes('whatsapp');
+    if (isWhatsAppSelected && (!data.phone || data.phone.trim() === '')) {
+      setError('phone' as any, {
+        type: 'manual',
+        message: 'Phone number is required when WhatsApp is selected.',
+      });
+      return;
+    }
+
+    clearErrors(['preferredContact' as any, 'phone' as any]);
+
     console.log('Submitting form with data:', data);
-    console.log('Using EmailJS config:', {
-      serviceId: process.env.SERVICE_ID,
-      templateId: process.env.TEMPLATE_ID,
-      publicKey: process.env.PUBLIC_KEY?.substring(0, 10) + '...'
-    });
-    
+
+    const contactMethodsText = data.preferredContact.join(', ');
+
     emailjs
       .send(
-        process.env.SERVICE_ID!,
-        process.env.TEMPLATE_ID!,
+        'service_vec1lic',
+        'template_9mg856l',
         {
           name: data.name,
           email: data.email,
-          phone: data.phone,
+          phone: data.phone || 'Not provided',
+          preferredContact: contactMethodsText,
           date: data.date
             ? new Date(data.date).toLocaleDateString('en-GB')
             : '',
           ceremonyLocation: data.ceremonyLocation,
           notice: data.notice,
         },
-        process.env.PUBLIC_KEY!
+        'lP2sd_HVK-hsVAY2w'
       )
       .then(
         (result) => {
           console.log('✅ Email sent successfully:', result);
           alert('Thank you! Your message has been sent successfully.');
-          reset(); // Reset form after successful submission
+          reset();
         },
         (error) => {
           console.error('❌ EmailJS error:', error);
@@ -77,6 +100,55 @@ export const Form = () => {
             <StyledFormWrapper>
               <InputComponent id='name' />
               <InputComponent id='email' />
+
+              {/* Блок выбора предпочтительного способа связи */}
+              <FormControl component="fieldset" error={!!(errors as any).preferredContact} style={{ gridColumn: '1 / -1', marginTop: '10px' }}>
+                <FormLabel component="legend" style={{ color: '#333', marginBottom: '5px' }}>
+                  Preferred contact method:
+                </FormLabel>
+                <Controller
+                  name="preferredContact" as any
+                  control={control}
+                  render={({ field }) => {
+                    const currentValues: string[] = field.value || [];
+                    
+                    const handleCheck = (value: string) => {
+                      if (currentValues.includes(value)) {
+                        field.onChange(currentValues.filter((v) => v !== value));
+                      } else {
+                        field.onChange([...currentValues, value]);
+                      }
+                    };
+
+                    return (
+                      <div style={{ display: 'flex', gap: '20px' }}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={currentValues.includes('email')}
+                              onChange={() => handleCheck('email')}
+                            />
+                          }
+                          label="Email"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={currentValues.includes('whatsapp')}
+                              onChange={() => handleCheck('whatsapp')}
+                            />
+                          }
+                          label="WhatsApp / Phone"
+                        />
+                      </div>
+                    );
+                  }}
+                />
+                {(errors as any).preferredContact && (
+                  <FormHelperText error>{(errors as any).preferredContact.message}</FormHelperText>
+                )}
+              </FormControl>
+
               <PhoneInputComponent />
               <DateInput name='date' control={control} />
               <InputComponent id='ceremonyLocation' />
