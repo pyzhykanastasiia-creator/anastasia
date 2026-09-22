@@ -51,6 +51,15 @@ const portfolioData = [
     alt: 'Textured wedding updo hairstyle by Amsterdam bridal hairstylist',
     grid: '13 / 1 / 14 / 2',
     isTall: false,
+    {
+  type: 'video',
+  category: 'hairstyles', // Попадёт в папку/фильтр "Hairstyles & Updos"
+  title: 'Bridal Half Up Half Down Styling | Amsterdam',
+  url: '/video/bridal-half-up-half-down-hairstylist-amsterdam.mp4',
+  alt: 'Textured bridal half up half down hairstyle with romantic waves by Amsterdam hairstylist Bride Palette',
+  grid: '1 / 1 / 4 / 2', // Позиция в сетке
+  isTall: true,
+}
   },
   {
     title: 'IMG_0005',
