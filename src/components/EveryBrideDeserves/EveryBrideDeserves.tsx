@@ -17,7 +17,7 @@ const portfolioData = [
     title: 'Asian Soft Glam Video',
     type: 'video',
     category: 'asian',
-    url: '/video/asian-bridal-video-amsterdam.mp4',
+    url: '/video/asian-bridal-video-amsterdam.mp4.mp4',
     alt: 'Asian bridal makeup process video in Amsterdam by Bride Palette',
     grid: '1 / 1 / 4 / 2',
     isTall: true,
