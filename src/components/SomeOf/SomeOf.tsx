@@ -25,7 +25,7 @@ const config = {
     },
     {
       title: 'Hairstyle 3',
-      image: '/img/homepage/Homepage5.jpg',
+      image: '/img/homepage/Half up half down hairstyle.jpg',
     },
   ]
 };
