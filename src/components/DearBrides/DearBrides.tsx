@@ -42,8 +42,7 @@ export const DearBrides = () => {
               </StyledP>
               <StyledP variant='body1' isMobile={isMobile}>
                 Bridal previews are only available after a booking is made and
-                the retainer has been paid. Bridal previews are held in-studio,
-                not on location, and are available on Mondays. They are
+                the retainer has been paid. They are
                 exclusively for brides, not bridal party members or moms. 
               </StyledP>
             </StyledWrapperLeft>
