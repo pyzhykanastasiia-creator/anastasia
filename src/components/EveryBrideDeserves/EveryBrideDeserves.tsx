@@ -11,9 +11,8 @@ import {
 } from './Styled';
 import { useResponsive } from '@/contexts/ResponsiveContext';
 
-// 1. Полный список медиафайлов: сохранены все текущие картинки + добавлено новое видео
 const portfolioData = [
-  // НОВОЕ ВИДЕО (Азиатский макияж)
+  // 1. Азиатское видео
   {
     title: 'Asian Soft Glam Video',
     type: 'video',
@@ -23,8 +22,16 @@ const portfolioData = [
     grid: '1 / 1 / 4 / 2',
     isTall: true,
   },
-  
-  // ТЕКУЩИЕ СНИМКИ С SEO-ОПИСАНИЯМИ И КАТЕГОРИЯМИ
+  // 2. Новое видео Half Up Half Down (исправлена позиция grid, чтобы не накладывалось)
+  {
+    title: 'Bridal Half Up Half Down Styling | Amsterdam',
+    type: 'video',
+    category: 'hairstyles',
+    url: '/video/bridal-half-up-half-down-hairstylist-amsterdam.mp4',
+    alt: 'Textured bridal half up half down hairstyle with romantic waves by Amsterdam hairstylist Bride Palette',
+    grid: '1 / 2 / 4 / 3',
+    isTall: true,
+  },
   {
     title: 'IMG_0001',
     type: 'image',
@@ -51,15 +58,6 @@ const portfolioData = [
     alt: 'Textured wedding updo hairstyle by Amsterdam bridal hairstylist',
     grid: '13 / 1 / 14 / 2',
     isTall: false,
-     },
-    {
-  type: 'video',
-  category: 'hairstyles', // Попадёт в папку/фильтр "Hairstyles & Updos"
-  title: 'Bridal Half Up Half Down Styling | Amsterdam',
-  url: '/video/bridal-half-up-half-down-hairstylist-amsterdam.mp4',
-  alt: 'Textured bridal half up half down hairstyle with romantic waves by Amsterdam hairstylist Bride Palette',
-  grid: '1 / 1 / 4 / 2', // Позиция в сетке
-  isTall: true,
   },
   {
     title: 'IMG_0005',
@@ -85,7 +83,7 @@ const portfolioData = [
     category: 'hairstyles',
     url: '/img/portfolio/section_8.jpg',
     alt: 'Wedding hairstyle details for bride in Amsterdam',
-    grid: '1 / 2 / 2 / 3',
+    grid: '4 / 2 / 6 / 3',
     isTall: false,
   },
   {
@@ -94,7 +92,7 @@ const portfolioData = [
     category: 'tan',
     url: '/img/portfolio/section_9.jpg',
     alt: 'Glowy bridal makeup on warm skin tone in Netherlands',
-    grid: '3 / 2 / 6 / 3',
+    grid: '7 / 2 / 10 / 3',
     isTall: true,
   },
   {
@@ -103,7 +101,7 @@ const portfolioData = [
     category: 'asian',
     url: '/img/portfolio/section_10.jpg',
     alt: 'Asian bridal hair styling and makeup in Amsterdam',
-    grid: '7 / 2 / 10 / 3',
+    grid: '11 / 2 / 14 / 3',
     isTall: true,
   },
   {
@@ -112,7 +110,7 @@ const portfolioData = [
     category: 'european',
     url: '/img/portfolio/section_11.jpg',
     alt: 'Soft glam European wedding look in Netherlands',
-    grid: '11 / 2 / 14 / 3',
+    grid: '15 / 2 / 17 / 3',
     isTall: true,
   },
   {
@@ -121,7 +119,7 @@ const portfolioData = [
     category: 'hairstyles',
     url: '/img/portfolio/section_12.jpg',
     alt: 'Textured bridal bun hairstyle Bride Palette',
-    grid: '15 / 2 / 16 / 3',
+    grid: '18 / 2 / 19 / 3',
     isTall: false,
   },
   {
@@ -130,7 +128,7 @@ const portfolioData = [
     category: 'tan',
     url: '/img/portfolio/section_13.jpg',
     alt: 'Sun-kissed bronzed bridal makeup in Amsterdam',
-    grid: '17 / 2 / 20 / 3',
+    grid: '20 / 2 / 23 / 3',
     isTall: true,
   },
 ];
@@ -139,7 +137,6 @@ export const EveryBrideDeserves = () => {
   const { isMobile } = useResponsive();
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
-  // Фильтрация элементов по категориям
   const filteredItems = activeCategory === 'all'
     ? portfolioData
     : portfolioData.filter((item) => item.category === activeCategory);
@@ -150,7 +147,6 @@ export const EveryBrideDeserves = () => {
         <StyledH1 variant='h3'>every bride deserves</StyledH1>
         <StyledH2 variant='h3'>to fall in love with themselves</StyledH2>
 
-        {/* 2. Кнопки переключения альбомов (Категорий) */}
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -185,12 +181,11 @@ export const EveryBrideDeserves = () => {
           ))}
         </div>
 
-        {/* 3. Галерея (Отрисовка фото и видео) */}
         <StyledWrapper isMobile={isMobile}>
-          {filteredItems.map((item) => (
+          {filteredItems.map((item, index) => (
             item.type === 'video' ? (
               <div 
-                key={item.url} 
+                key={item.url + index} 
                 style={{ 
                   gridArea: item.grid, 
                   width: '100%', 
@@ -215,9 +210,9 @@ export const EveryBrideDeserves = () => {
               </div>
             ) : (
               <StyledImg
-                key={item.title}
+                key={item.title + index}
                 src={item.url}
-                alt={item.alt} // Улучшено для SEO Google
+                alt={item.alt}
                 grid={item.grid}
                 isTall={item.isTall}
               />
