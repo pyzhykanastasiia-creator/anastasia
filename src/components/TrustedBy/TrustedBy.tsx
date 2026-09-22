@@ -26,7 +26,7 @@ export const TrustedBy = () => {
         <StyledWrapper isMobile={isMobile}>
           <StyledWrapperLeft>
             <StyledH1 variant='h3' isMobile={isMobile}>
-              TRUSTED BY OVER 500+ BRIDES
+              TRUSTED BY OVER 800+ BRIDES
             </StyledH1>
             <StyledH2 variant='h3' isMobile={isMobile}>
               more than just makeup and hair
