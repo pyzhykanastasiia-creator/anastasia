@@ -17,12 +17,12 @@ const portfolioData = [
     title: 'Asian Soft Glam Video',
     type: 'video',
     category: 'asian',
-    url: '/video/asian-bridal-video-amsterdam.mp4.mp4',
+    url: '/video/asian-bridal-video-amsterdam.mp4', // Убрано лишнее .mp4
     alt: 'Asian bridal makeup process video in Amsterdam by Bride Palette',
     grid: '1 / 1 / 4 / 2',
     isTall: true,
   },
-  // 2.  видео Half Up Half Down 
+  // 2. Видео Half Up Half Down
   {
     title: 'Bridal Half Up Half Down Styling | Amsterdam',
     type: 'video',
@@ -182,16 +182,21 @@ export const EveryBrideDeserves = () => {
         </div>
 
         <StyledWrapper isMobile={isMobile}>
-          {filteredItems.map((item, index) => (
-            item.type === 'video' ? (
+          {filteredItems.map((item, index) => {
+            // Если выбран фильтр (не All), игнорируем жесткую привязку к колонкам, чтобы верстка не "лагала"
+            const gridStyle = activeCategory === 'all' ? item.grid : 'auto';
+
+            return item.type === 'video' ? (
               <div 
                 key={item.url + index} 
                 style={{ 
-                  gridArea: item.grid, 
+                  gridArea: gridStyle, 
                   width: '100%', 
+                  minHeight: '350px',
                   height: '100%', 
                   overflow: 'hidden', 
-                  borderRadius: '8px' 
+                  borderRadius: '8px',
+                  backgroundColor: '#f0f0f0'
                 }}
               >
                 <video
@@ -213,11 +218,11 @@ export const EveryBrideDeserves = () => {
                 key={item.title + index}
                 src={item.url}
                 alt={item.alt}
-                grid={item.grid}
+                grid={gridStyle}
                 isTall={item.isTall}
               />
-            )
-          ))}
+            );
+          })}
         </StyledWrapper>
       </Container>
     </StyledSection>
