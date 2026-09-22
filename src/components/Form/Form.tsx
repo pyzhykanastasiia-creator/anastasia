@@ -26,40 +26,32 @@ export const Form = () => {
       date: new Date(),
       ceremonyLocation: '',
       notice: '',
-      preferredContact: ['email'], // По умолчанию выбран Email
+      preferredContact: ['email'],
     },
   });
 
   const { control, handleSubmit, reset, watch, setError, clearErrors, formState: { errors } } = methods;
 
-  // Отслеживаем выбранные способы связи
-  const preferredContact = watch('preferredContact') || [];
-
   const onSubmit = (data: any) => {
-    // Валидация: должен быть выбран хотя бы один способ связи
-    if (!data.preferredContact || data.preferredContact.length === 0) {
+    const selectedContacts = data.preferredContact || [];
+
+    if (selectedContacts.length === 0) {
       setError('preferredContact' as any, {
         type: 'manual',
-        message: 'Please select at least one preferred contact method.',
+        message: 'Please select at least one contact method',
       });
       return;
     }
 
-    // Валидация: если выбран WhatsApp, телефон обязателен
-    const isWhatsAppSelected = data.preferredContact.includes('whatsapp');
-    if (isWhatsAppSelected && (!data.phone || data.phone.trim() === '')) {
+    if (selectedContacts.includes('whatsapp') && (!data.phone || !data.phone.trim())) {
       setError('phone' as any, {
         type: 'manual',
-        message: 'Phone number is required when WhatsApp is selected.',
+        message: 'Phone is required for WhatsApp',
       });
       return;
     }
 
     clearErrors(['preferredContact' as any, 'phone' as any]);
-
-    console.log('Submitting form with data:', data);
-
-    const contactMethodsText = data.preferredContact.join(', ');
 
     emailjs
       .send(
@@ -69,7 +61,7 @@ export const Form = () => {
           name: data.name,
           email: data.email,
           phone: data.phone || 'Not provided',
-          preferredContact: contactMethodsText,
+          preferredContact: selectedContacts.join(', '),
           date: data.date
             ? new Date(data.date).toLocaleDateString('en-GB')
             : '',
@@ -79,14 +71,12 @@ export const Form = () => {
         'lP2sd_HVK-hsVAY2w'
       )
       .then(
-        (result) => {
-          console.log('✅ Email sent successfully:', result);
+        () => {
           alert('Thank you! Your message has been sent successfully.');
           reset();
         },
         (error) => {
-          console.error('❌ EmailJS error:', error);
-          alert(`Email failed: ${error.text || 'Unknown error'}. Please check your EmailJS configuration.`);
+          alert(`Email failed: ${error.text || 'Error'}`);
         }
       );
   };
@@ -101,22 +91,20 @@ export const Form = () => {
               <InputComponent id='name' />
               <InputComponent id='email' />
 
-              {/* Блок выбора предпочтительного способа связи */}
-              <FormControl component="fieldset" error={!!(errors as any).preferredContact} style={{ gridColumn: '1 / -1', marginTop: '10px' }}>
+              <FormControl component="fieldset" style={{ gridColumn: '1 / -1', marginTop: '10px' }}>
                 <FormLabel component="legend" style={{ color: '#333', marginBottom: '5px' }}>
                   Preferred contact method:
                 </FormLabel>
                 <Controller
-                  name="preferredContact" as any
+                  name="preferredContact"
                   control={control}
                   render={({ field }) => {
-                    const currentValues: string[] = field.value || [];
-                    
-                    const handleCheck = (value: string) => {
-                      if (currentValues.includes(value)) {
-                        field.onChange(currentValues.filter((v) => v !== value));
+                    const currentValues = (field.value as string[]) || [];
+                    const handleCheck = (val: string) => {
+                      if (currentValues.includes(val)) {
+                        field.onChange(currentValues.filter((v) => v !== val));
                       } else {
-                        field.onChange([...currentValues, value]);
+                        field.onChange([...currentValues, val]);
                       }
                     };
 
