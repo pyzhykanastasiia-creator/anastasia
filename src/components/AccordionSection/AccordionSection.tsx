@@ -27,7 +27,7 @@ const config = [
     image: '/img/services/basic.jpg',
     name: 'Basic',
     name2: 'Package',
-    price: '€ 800',
+    price: '€ 1000',
     name3: "What you'll receive:",
     text: [
       'CONSULTATION',
@@ -43,7 +43,7 @@ const config = [
     name: 'Basic',
     spanName: ' +2guests',
     name2: 'Package',
-    price: '€ 1000',
+    price: '€ 1300',
     name3: "What you'll receive:",
     text: [
       'SOFT MAKEUP&HAIRSTYLE FOR 2 GUESTS (MAX 1 HOUR FOR EACH)',
@@ -59,7 +59,7 @@ const config = [
     image: '/img/services/luxe.jpg',
     name: 'Luxe',
     name2: 'Package',
-    price: '€ 1200',
+    price: '€ 1400',
     name3: "What you'll receive:",
     text: [
       'PERSONAL BEAUTY ASSISTANT FOR 8 HOURS',
