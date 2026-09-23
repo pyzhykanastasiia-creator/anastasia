@@ -25,7 +25,7 @@ import { useResponsive } from '@/contexts/ResponsiveContext';
 // const config = [
 //   {
 //     title: 'Accordion1',
-//     image: '/img/homepage/Homepage9.jpg',
+//     image: '/img/homepage/price wedding.jpg',
 //     name: 'Basic',
 //     name2: 'Package',
 //     price: '€ 1000',
