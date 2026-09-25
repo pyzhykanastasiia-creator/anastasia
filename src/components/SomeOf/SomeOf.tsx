@@ -23,10 +23,10 @@ const config = {
       title: 'Hairstyle 2',
       image: '/img/homepage/Homepage4.jpg',
     },
-    {
-      title: 'Hairstyle 3',
-      image: '/img/homepage/Halfuphalfdownhairstyle.JPG',
-    },
+  {
+  title: 'Hairstyle 3',
+  image: '/img/homepage/Halfuphalfdownhairstyle.JPG',
+},
   ]
 };
 
